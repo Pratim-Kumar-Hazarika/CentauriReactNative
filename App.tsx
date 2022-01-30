@@ -19,6 +19,7 @@ import { Data } from './utils/data';
 import Products from './components/Products';
 import { CartContextProvider, useCart } from './Context/CartContext';
 import ProductDetails from './components/ProductDetails';
+import Cart from './components/Cart';
 
 const App = () => {
 
@@ -32,13 +33,16 @@ const App = () => {
       //     tabBarActiveTintColor: '#00a3ff',
           
       // })}
+      
       >
+        
       <Stack.Screen
           name="Men Tshirts"
           component={Products}
-          // options={{ tabBarBadge: "5" }}
+         
         />
         <Stack.Screen name="ProductDetails"   options={{ title: ' ',  headerTintColor: '#282C3F', }} component={ProductDetails} />
+        <Stack.Screen  name="Cart"  options={{ title: 'Your Cart', headerTintColor: '#282C3F', }} component={Cart} />
       </Stack.Navigator>
     </NavigationContainer>
     </CartContextProvider>
