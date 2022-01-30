@@ -13,8 +13,27 @@ import React from 'react';
 import { Data } from '../utils/data';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { CartContext } from '../Context/CartContext';
+import ActionBarImage from './ActionBarImage';
+import { MessageOutlined, QuestionCircleOutlined, UpCircleOutlined } from '@ant-design/icons';
+import { Icon } from 'react-native-elements';
+
+function Test(){
+    return(
+        <View>
+               <Icon
+                name='g-translate'
+                color='#00aced' tvParallaxProperties={undefined} />
+        </View>
+    )
+}
+
 const Products = ({ navigation }:any) => {
     console.log("navigation",{navigation})
+    React.useLayoutEffect(() => {
+        navigation.setOptions({
+          headerRight: () => <ActionBarImage navigation={navigation}/>
+        });
+      }, [navigation]);
     const renderItem = ({ item }): JSX.Element => (
         <TouchableOpacity onPress={()=>navigation.navigate('ProductDetails',{options:item})}>
       <View style={styles.card} >
@@ -24,6 +43,8 @@ const Products = ({ navigation }:any) => {
             uri: item.imageUrl,
           }}
         />
+        
+
         <Text style={styles.cardBrandName}>{item.brandName}</Text>
         <Text style={styles.cardBrandDetails}>{item.brandDetails}</Text>
         <Text style={styles.cardBrandPrice}>{item.brandPrice}</Text>
