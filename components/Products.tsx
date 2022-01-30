@@ -6,12 +6,17 @@ import {
   ScrollView,
   StyleSheet,
   Text,
+  TouchableOpacity,
   View,
 } from 'react-native';
 import React from 'react';
 import { Data } from '../utils/data';
+import { SafeAreaView } from 'react-native-safe-area-context';
+import { CartContext } from '../Context/CartContext';
 const Products = ({ navigation }:any) => {
+    console.log("navigation",{navigation})
     const renderItem = ({ item }): JSX.Element => (
+        <TouchableOpacity onPress={()=>navigation.navigate('ProductDetails',{options:item})}>
       <View style={styles.card} >
         <Image
           style={styles.cardImage}
@@ -23,9 +28,11 @@ const Products = ({ navigation }:any) => {
         <Text style={styles.cardBrandDetails}>{item.brandDetails}</Text>
         <Text style={styles.cardBrandPrice}>{item.brandPrice}</Text>
         </View>
+        </TouchableOpacity>
     );
     return (
-      <ScrollView>
+        <>
+      <ScrollView keyboardShouldPersistTaps='always'>
       <FlatList
           contentContainerStyle={styles.flatList}
           data={Data}
@@ -33,6 +40,7 @@ const Products = ({ navigation }:any) => {
           keyExtractor={item => item.id}
         />
       </ScrollView>
+      </>
     );
   };
 
