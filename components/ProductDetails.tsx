@@ -2,7 +2,9 @@
 
 import { Text, StyleSheet, View, Image, TouchableHighlight, Dimensions, ScrollView, Button } from 'react-native';
 import React, { Component } from 'react';
-
+import ActionBarImage from './ActionBarImage';
+// import { Icon } from 'react-native-elements';
+import Icon from 'react-native-vector-icons/FontAwesome'
 function ItemSize({itemSize}:any){
     return(
         <View>
@@ -31,16 +33,25 @@ function ItemSize({itemSize}:any){
 export default function ProductDetails({ navigation, route }:any) {
     console.log({route})
     console.log("herer",route.params.options)
+    React.useLayoutEffect(() => {
+        navigation.setOptions({
+          headerRight: () => <ActionBarImage navigation={navigation}/>,
+        });
+      }, [navigation]);
+    
     return (
         <View>
-        <ScrollView>
+        <ScrollView style={{height:'100%'}}>
       <View style={styles.cardContainer}>
+        
+      
         <Image
           style={styles.cardImage}
           source={{
             uri: "https://assets.myntassets.com/f_webp,fl_progressive/h_960,q_80,w_720/v1/assets/images/1700871/2020/1/22/f932ae44-0fb8-4b92-b7bc-f1756253294b1579692118186-HRX-by-Hrithik-Roshan-Men-Teal-Blue-Printed-T-shirt-90515796-1.jpg",
           }}
         />
+    
          <Text style={styles.itemBrandName}>HRX by Hrithik Roshan</Text>
         <Text style={styles.itemDetails}>Men Teal Blue Printed Pure Cotton T-shirt</Text>
         <Text style={styles.itemPrice}>Rs 349</Text>
@@ -70,11 +81,15 @@ export default function ProductDetails({ navigation, route }:any) {
       </ScrollView>
       <View style={styles.container}>
           <View>
-          <Text style={styles.buttonText}>Cart</Text>
+          <Text style={[styles.buttonText,{
+              backgroundColor:'white',
+              color:'#3E4152',
+              borderColor:'#D4D5D9'
+          }]}>WISHLIST</Text>
           </View>
        
           <View>
-          <Text style={styles.buttonText}>Wishlist</Text>
+          <Text style={[styles.buttonText,{marginRight:4}]}>ADD TO CART</Text>
           </View>
     </View>
 </View>
@@ -154,20 +169,23 @@ const styles = StyleSheet.create({
         justifyContent:'space-between',
         bottom:0,
         backgroundColor:'white',
-        height:70,
+        height:84,
         // borderTopColor:'grey',
         // borderWidth:1
       },
       buttonText:{
           textAlign:'center',
-          fontSize:20,
-          width:186,
+          fontSize:16,
+          width:184,
           backgroundColor:'#FF3E6C',
           color:'white',
           padding:10,
-          borderRadius:10,
+          borderRadius:7,
           borderColor:'#FF3E6C',
-          borderWidth:5,
-          overflow:'hidden'
+          borderWidth:1,
+          overflow:'hidden',
+          fontWeight:'700',
+          marginLeft:4,
+          marginTop:3
       }
 });
