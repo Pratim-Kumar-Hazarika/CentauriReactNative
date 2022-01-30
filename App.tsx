@@ -17,31 +17,31 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import Icon from 'react-native-vector-icons/FontAwesome'; 
 import { Data } from './utils/data';
 import Products from './components/Products';
-
-const SeconedScreen = ({ navigation, route }:any) => {
-  return <Text>This is seconed Screen,n </Text>;
-};
+import { CartContextProvider, useCart } from './Context/CartContext';
+import ProductDetails from './components/ProductDetails';
 
 const App = () => {
+
+  const Tab = createBottomTabNavigator();  
   const Stack = createNativeStackNavigator();
-  const Tab = createBottomTabNavigator();
-  
   return (
+    <CartContextProvider>
     <NavigationContainer>
-      <Tab.Navigator
-      screenOptions={({ route }) => ({
-          tabBarActiveTintColor: '#00a3ff',
+      <Stack.Navigator
+      // screenOptions={({ route }) => ({
+      //     tabBarActiveTintColor: '#00a3ff',
           
-      })}
+      // })}
       >
-      <Tab.Screen
-          name="Home"
+      <Stack.Screen
+          name="Men Tshirts"
           component={Products}
-          options={{ tabBarBadge: "5" }}
+          // options={{ tabBarBadge: "5" }}
         />
-        <Tab.Screen name="Profile"   options={{ title: 'Seconed Screen' }} component={SeconedScreen} />
-      </Tab.Navigator>
+        <Stack.Screen name="ProductDetails"   options={{ title: ' ',  headerTintColor: '#282C3F', }} component={ProductDetails} />
+      </Stack.Navigator>
     </NavigationContainer>
+    </CartContextProvider>
   );
 };
 
