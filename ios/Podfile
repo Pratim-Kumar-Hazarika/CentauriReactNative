@@ -12,6 +12,7 @@ target 'CentauriReactNative' do
     :hermes_enabled => false
   )
 
+
   target 'CentauriReactNativeTests' do
     inherit! :complete
     # Pods for testing
